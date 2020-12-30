@@ -1,0 +1,429 @@
+@import '../_commonx/config/markdown'
+
+.markdown-body 
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, Song, sans-serif;
+  color: $md-color-text
+  line-height: 1.6em
+  font-size: $md-size
+  code, pre 
+    border-radius: $md-br
+    color: inherit;
+    box-sizing: border-box
+  code 
+    color: $md-key-color
+    background: fade-out($md-key-color, .9)
+    padding: .1em .3em;
+  pre 
+    line-height: 1.3em;
+    overflow: auto;
+    max-height: 45em
+  pre, .markdown-section>p, table, , .markdown-section>ul
+    margin: 0 0 1em
+    color: $md-color-title
+
+  pre > code 
+    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+    padding 1rem
+    display: block;
+    max-width: initial;
+    margin: 0;
+    line-height: inherit;
+    font-size: .85em;
+    white-space: pre;
+    color: transparent
+  
+
+
+  @media screen and (min-width: 768px) 
+    body 
+      width: 748px;
+
+  h1, h2, h3, h4 
+    color: $md-color-title
+    font-weight: bold;
+  
+  h1 
+    font-size: $md-size-title-1
+    margin-bottom: 1.5em
+  
+  h2 
+    font-size: $md-size-title-2
+
+  h3 
+    font-size: $md-size-title-3
+  
+  h4 
+    font-size: $md-size-title-4
+  
+  h5 
+    font-size: $md-size-title-5
+  
+  h2, h3, h4, h5
+    margin: 1em 0 
+
+  a 
+    color: $md-color-link
+    vertical-align: baseline;
+    cursor: pointer;
+    text-decoration: underline;
+  
+  a:hover 
+    text-decoration: none;
+    color: $md-color-link-active
+  
+  a:visited 
+    /*color: purple;*/
+  
+  ul, ol 
+    padding-left: 24px;
+  
+  // li 
+  //   // line-height: 24px;
+  
+  // p, ul, ol 
+  //   font-size: 16px;
+  //   // line-height: 24px;
+  
+
+  ol ol, ul ol 
+    list-style-type: lower-roman;
+  
+
+  aside 
+    display: block;
+    float: right;
+    width: 390px;
+  
+  blockquote 
+    width 100%;
+    position: relative
+    box-sizing: border-box
+    &:before
+      content: ''
+      width: .5em
+      background: $md-key-color
+      height: 100%
+      position: absolute;
+      top: 0;
+      left: 0;
+    >p
+      padding: 1em
+      color: $md-color-title
+      background-color: fade-out($md-key-color, .95)
+      margin-bottom: 1em
+  blockquote > blockquote
+    color: #856404;
+    &:before
+      background: #ffeeba;
+    > p 
+      background-color: #fff3cd;
+      color: #856404;
+    
+    > blockquote
+      width 100%
+      color: #155724;
+      border-color: #c3e6cb;
+      &:before
+        background: #c3e6cb;
+      > p 
+        background-color: #d4edda;
+        color: #155724;
+      
+      > blockquote 
+        color: #721c24;
+        border-color: #f5c6cb;
+        &:before
+          background: #f5c6cb;
+        > p
+          background-color: #f8d7da;
+          color: #721c24;
+        
+        > blockquote
+          color: #004085;
+          border-color: #b8daff;
+          &:before
+            background: #b8daff;
+          > p
+            background-color: #cce5ff;
+            color #004085
+
+  blockquote  cite 
+    font-size:14px;
+    line-height:20px;
+    color:#bfbfbf;
+  
+  blockquote cite:before 
+    content: '\2014 \00A0';
+
+  
+  hr 
+    text-align: left;
+    color: $md-color-desc
+    height: 2px;
+    padding: 0;
+    margin: 1em 0;
+    background-color: $border-color
+    border: 0 none;
+  dl 
+    padding: 0;
+  dl dt 
+    padding: 10px 0;
+    margin-top: 1em
+    font-size: 1em;
+    font-style: italic;
+    font-weight: bold;
+  dl dd 
+    padding: 0 1em
+    margin-bottom: 1em
+  
+
+  dd 
+    margin-left: 0;
+  
+
+  /* Code below this line is copyright Twitter Inc. */
+
+  button,
+  input,
+  select,
+  textarea 
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+  
+  button, input 
+    line-height: normal;
+    *overflow: visible;
+  
+  button::-moz-focus-inner, input::-moz-focus-inner 
+    border: 0;
+    padding: 0;
+  
+  button,
+  input[type="button"],
+  input[type="reset"],
+  input[type="submit"] 
+    cursor: pointer;
+    -webkit-appearance: button;
+  
+  input[type=checkbox], input[type=radio] 
+      cursor: pointer;
+  
+  /* override default chrome & firefox settings */
+  input:not([type="image"]), textarea 
+    box-sizing: content-box;
+  
+
+  input[type="search"] 
+    box-sizing: content-box;
+  
+  input[type="search"]::-webkit-search-decoration 
+    -webkit-appearance: none;
+  
+  label,
+  input,
+  select,
+  textarea 
+    // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: normal;
+    margin-bottom: 18px;
+  
+  input[type=checkbox], input[type=radio] 
+    cursor: pointer;
+    margin-bottom: 0;
+  
+  input[type=text],
+  input[type=password],
+  textarea,
+  select 
+    display: inline-block;
+    width: 210px;
+    padding: 4px;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 18px;
+    height: 18px;
+    color: #808080;
+    border: 1px solid $md-border-color
+    border-radius: 3px;
+  
+  select, input[type=file] 
+    height: 27px;
+    line-height: 27px;
+  
+  textarea 
+    height: auto;
+  
+  /* grey out placeholders */
+  :-moz-placeholder 
+    color: #bfbfbf;
+  
+  ::-webkit-input-placeholder 
+    color: #bfbfbf;
+  
+  input[type=text],
+  input[type=password],
+  select,
+  textarea 
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  input[type=text]:focus, input[type=password]:focus, textarea:focus 
+    outline: none;
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  
+  /* buttons */
+  button 
+    display: inline-block;
+    padding: 4px 14px;
+    // font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    background-color: #0064cd;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+    background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+    background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+    background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+    background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+    background-image: linear-gradient(top, #049cdb, #0064cd);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border: 1px solid #004b9a;
+    transition: 0.1s linear all;
+    border-color: #0064cd #0064cd #003f81;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  
+  button:hover 
+    color: #fff;
+    background-position: 0 -15px;
+    text-decoration: none;
+  
+  button:active 
+    box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  
+  button::-moz-focus-inner 
+    padding: 0;
+    border: 0;
+  
+  table 
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 100%;
+  
+  table 
+    border: solid $md-border-color 1px;
+    border-radius: $md-br
+  
+  table tbody tr:hover 
+    background: fade-out($md-color-link-active, .9)
+    transition: all 0.1s ease-in-out;
+    color: $md-color-link-active
+
+  table td, .table th 
+    border-left: 1px solid $md-border-color
+    border-top: 1px solid $md-border-color
+    padding: .6em 1em;
+    text-align: left;
+    font-weight: normal
+
+  table th 
+    background-color: $md-color-link-active
+    color: $md-table-thead-color
+    border-top: none;
+    padding: .5em 1em
+    font-weight: normal
+
+  table td:first-child, table th:first-child 
+    border-left: none;
+
+  table th:first-child 
+    border-radius: $md-br 0 0 0;
+
+  table th:last-child 
+    border-radius: 0 $md-br 0 0;
+
+  table th:only-child
+    border-radius: $md-br $md-br 0 0;
+
+  table tr:last-child td:first-child 
+    border-radius: 0 0 0 $md-br;
+
+  table tr:last-child td:last-child 
+    border-radius: 0 0 $md-br 0;
+
+
+  code.hljs 
+    display: block;
+    overflow-x: auto;
+    background: $hljs-bg
+    color: $hljs-title
+  //   padding: .5em;
+
+  .hljs-emphasis,.hljs-strong 
+    color: $hljs-emphasis
+
+  .hljs-bullet,.hljs-link,.hljs-literal,.hljs-number,.hljs-quote,.hljs-regexp 
+    color: $hljs-literal
+
+  .hljs-code,.hljs-section,.hljs-selector-class
+    color: $hljs-section
+
+  .hljs-strong 
+    font-weight: bold
+
+  // .hljs-emphasis 
+  //     font-style: italic
+
+  .hljs-attr,.hljs-keyword,.hljs-name,.hljs-selector-tag 
+    color: $hljs-attr
+
+  .hljs-attribute,.hljs-symbol 
+    color: $hljs-attribute
+
+  .hljs-class .hljs-title,.hljs-params 
+    color: $hljs-title
+
+  .hljs-addition,.hljs-built_in,.hljs-builtin-name,.hljs-selector-attr,.hljs-selector-id,.hljs-selector-pseudo,.hljs-string,.hljs-template-variable,.hljs-type,.hljs-variable 
+    color: $hljs-string
+
+  .hljs-comment,.hljs-deletion,.hljs-meta 
+    color: $hljs-comment
+
+
+
+// code, pre 
+//   border-radius: 3px;
+//   color: inherit;
+// code 
+//   margin: 0 2px;
+//   padding 2px 4px;
+//   color: #e96900;
+//   background: #f9f2f4;
+
+
+// pre 
+//   line-height: 1.3em;
+//   overflow: auto;
+//   padding: 6px 10px;
+//   background-color:#f7f7f7;
+//   margin-bottom 1em;
+
+
+// pre > code 
+//   border: 0;
+//   display: inline;
+//   max-width: initial;
+//   padding: 0;
+//   margin: 0;
+//   overflow: initial;
+//   line-height: inherit;
+//   font-size: .85em;
+//   white-space: pre;

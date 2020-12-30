@@ -1,0 +1,55 @@
+
+/*
+  custom.styl
+    不知道放在哪个样式表的，
+    或需要@extends 简单的
+  -------------------------------------
+  -------------------------------------lgh
+*/
+body
+  font-size: $size
+
+//默认icon与文字之间的距离
+.ss-icon-right
+  margin-right: $icon-dist
+.ss-icon-left
+  margin-left: $icon-dist
+
+.ss-hr
+  height: 1px 
+  width: 100%
+  background: $color-line
+
+//文字链接
+[class*='link'], a
+  cursor: pointer
+  color: inherit
+  text-decoration: none
+  &:hover
+    color: $color-primary
+[class*='link-fail']
+  &:hover
+    color: $color-aux-fail
+[class*='link-primary']
+  color: $color-aux-primary
+  &:hover
+    color: $color-primary
+
+dCfg = {
+  $bg: $color-bg-special
+  $padding: 10px
+  $br: $br
+  $bs: false
+  $border: 1px solid $color-line-input
+}
+ss-func-display-div('.display-tips', dCfg)
+
+.item-space
+  ss-display-flex(row nowrap, space-between)
+  padding: $space-minor 0
+.item-space-btn
+  ss-display-flex(row nowrap, space-between)
+  padding: $space-small 0
+
+
+ss-func-customscroll('.o-y-auto', {$height: false})

@@ -1,0 +1,318 @@
+@import '../../css/_commonx/config/theme/default'    //系统主题
+@import '../../css/_commonx/config/codetheme/black'  //代码块模版
+@import '../../css/_commonx/cssFunc/pages/routerconfig/routerStyle2'        //左边菜单列表模板
+@import '../../css/_commondoc'                      //各系统公用部分
+
+@import '../../css/_commonx/css/width'        //width
+@import '../../css/_commonx/modules/table'        //table
+@import '../../css/_commonx/modules/swiper'       //swiper
+@import '../../css/_commonx/modules/bt_table'     //boostrap table
+@import '../../css/_commonx/modules/alert'        //alert
+@import '../../css/_commonx/modules/tooltip'        //tooltip
+
+
+@media (max-width: 768px)
+  .router-container
+    .demo-grid
+      .ss-col
+        width: calc(100% / 2)
+
+//业务
+.pages-title-sm
+  font-size: $size-title-lg
+  margin: 40px 0 10px;
+
+.pages-title-lg
+  color: $color-primary
+  font-size: $size-title-lg
+  font-weight: bold
+  margin-bottom: 40px;
+
+.demo-item-content
+  border-radius: $br
+  border: 1px solid $color-line-secondary
+  min-height: 160px
+  .item-head
+    padding: var(--space, $space)
+  .item-hr
+    position: relative
+    &:before
+      content: ''
+      height: 1px
+      width: 100%
+      background: $color-line-secondary
+      display: block
+    &:after
+      content: attr(data-content)
+      position: relative;
+      top: -9px;
+      background: #fff;
+      padding: 0 6px;
+      left: var(--space, $space)
+  .pages-title
+    padding: 0 var(--space, $space)
+
+.demo-grid
+  ss-func-grid('&', {$num: 5, $spacing: 10px})
+  &.num2
+    .ss-col
+      width: calc(100% / 2)
+  .caption
+    font-size: $size-title-sm
+    color: $color-text-title
+    margin-top: 20px
+  .item-box
+    box-sizing: border-box
+    height: 100px
+    padding: 30px 15px
+    border-radius: $br-lg
+    color: #fff
+    ss-display-flex(column, center, center)
+  .item-dot-i
+    font-style: normal
+    display: block
+    font-size: 12px
+
+//色块
+.demo-bg-primary .item-box
+  background: $color-primary
+
+.demo-bg-aux-primary .item-box
+  background: $color-aux-primary
+.demo-bg-aux-success .item-box
+  background: $color-aux-success
+.demo-bg-aux-warning .item-box
+  background: $color-aux-warning
+.demo-bg-aux-fail .item-box
+  background: $color-aux-fail
+.demo-bg-aux-info .item-box
+  background: $color-aux-info
+
+
+.demo-bg-text .item-box
+  background: $color-text
+.demo-bg-text-title .item-box
+  background: $color-text-title
+
+
+.demo-bg-color .item-box
+  background: $color-bg
+.demo-bg-color-special .item-box
+  background: $color-bg-special
+  
+.demo-bg-border .item-box
+  background: $color-line
+.demo-bg-border-secondary .item-box
+  background:$color-line-secondary
+.demo-bg-border-input .item-box
+  background:$color-line-input
+
+
+.item-theme
+  ss-display-flex()
+  >.item
+    margin-left: 10px
+
+.icon-saui
+  &:before
+    content: '\e605'
+    font-size: 40px
+
+.icon-xx
+  font-size: 12px
+  ss-display-flex(column, center, flex-start)
+  margin-bottom: 20px
+  margin-right: 0
+  width: 20%
+  &:before
+    content: '\e605'
+    font-size: 36px
+    color: $color-primary
+    margin-bottom: 6px
+
+//bootstrap
+.bootstrap-table
+  width: 100%
+
+
+//swiper
+.demo-swiper
+  height: 300px
+  width: 100%
+  img
+    width: 100%
+    display: block
+    height: 100%;
+    object-fit: cover;
+  &.item-swiper-2
+    height: 500px
+
+.demo-swiper-bg
+  background: url('https://www.weaver.com.cn/em/hwcloud/img/index/s_bg.jpg')
+  background-size: cover
+  width: 100%
+  height: 100%
+  &.full-center
+    ss-display-flex(column, center, center)
+  &.dsb-2
+    ss-display-flex(row nowrap, space-around, center)
+    .item-right
+      width: 40%
+  .btn-default
+    display: inline-flex
+    margin-top: 20px
+
+.swiper-slide-active
+  .bounceIn
+    animation-name: bounceIn
+  .bounceInUp
+    animation-name: bounceInUp
+  .fadeInUp
+    animation-name: fadeInUp
+  .fadeInRight
+    animation-name: fadeInRight
+  .fadeInUpBig
+    animation-name: fadeInUpBig
+  .fadeInRightBig
+    animation-name: fadeInRightBig
+.demo-title
+  font-size: 20px
+.demo-title-lg
+  font-size: 34px
+.demo-title-sm
+  font-size: 16px
+
+//动画
+.ss-animate
+  animation-duration: 1s;
+  animation-fill-mode: forwards
+// .bounceIn
+//   animation-name: bounceIn
+// .bounceInUp
+//   animation-name: bounceInUp
+// .fadeInUp
+//   animation-name: fadeInUp
+// .fadeInRight
+//   animation-name: fadeInRight
+// .fadeInUpBig
+//   animation-name: fadeInUpBig
+
+@keyframes fadeInRightBig {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(2000px);
+        -ms-transform: translateX(2000px);
+        transform: translateX(2000px)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0)
+    }
+}
+
+@keyframes fadeInUpBig {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(2000px);
+        transform: translateY(2000px)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+        transform: translateX(0)
+    }
+}
+
+@keyframes bounceInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(2000px);
+        -ms-transform: translateY(2000px);
+        transform: translateY(2000px)
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateY(-30px);
+        -ms-transform: translateY(-30px);
+        transform: translateY(-30px)
+    }
+
+    80% {
+        -webkit-transform: translateY(10px);
+        -ms-transform: translateY(10px);
+        transform: translateY(10px)
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        -ms-transform: scale(.3);
+        transform: scale(.3)
+    }
+
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05)
+    }
+
+    70% {
+        -webkit-transform: scale(.9);
+        -ms-transform: scale(.9);
+        transform: scale(.9)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1)
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px)
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+
+.demo-rounad-ui
+  .item-li
+    ss-display-flex(row, space-between)
+    &:first-child, &:last-child
+      justify-content: center

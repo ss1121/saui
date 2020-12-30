@@ -1,0 +1,56 @@
+//TIPS 部分
+ss-tips-system(tipsSysCfg, '.ss_tips_wrap')
+
+ss-tips-system2()
+drawerCfg = {
+  right: 0
+  top: 0
+  mb: false
+  min-width: 45vw
+  width: false
+  height: 100vh
+  br: 0
+  pd: 0
+  dire: 'tb'
+  direCfg: {
+    height: 18vh
+  }
+}
+
+ss-tips-system2('.ss_drawer_wrap', drawerCfg, '.ss-drawer')
+
+.ss_drawer_wrap
+  ss-display-flex(row)
+  &.abc
+    .ss-drawer
+      min-width: 35vw
+      z-index: 3
+
+//模拟表单提示
+ss-tips-like-form('.form-tips')
+//文字提示
+abc = {
+  $color: #ff7e11
+  $size: 6px
+  $arrowBc: lighten(#ff7e11, 70%)
+  $arrowBg: lighten(#ff7e11, 90%)
+  $spc: false
+}
+ss-tips-arrow('.wz-tips', abc)
+// ss-tips-arrow($tips-size-sm, $tips-padding-sm, $tips-icon-color, lighten($tips-icon-color, 90%), lighten($tips-icon-color, 70%), $tips-arrow-size-sm)
+ss-tips-arrow('.ss-tips-fff')
+
+
+// absolute层里的，是无法根据内容的长度来撑开的 有两个办法，第一种 强制不换行，第二种，父级的宽度一定要足够的宽
+xx = {
+  $isNowrap: false
+}
+ss-tips-arrow('.ss-tips-widp100', xx)
+
+
+@keyframes abc-xx
+  0% 
+    width: 0
+  100% 
+    width: 40vw
+    opacity: 0
