@@ -10,10 +10,15 @@ import path from 'path'
 import aotoo, {$$, lib, render, extTemplate} from "./ao2"
 import './ajax'  // context.Fetcher
 import _inject from 'aotoo-inject'
-import Pager from "./page";
+import Pager from "@aotoo/react-pager";
+import jquery from "jquery";
 let context = lib.curContext()
 let inject = _inject()
 
+if (lib.isClient()) {
+  window.$ = jquery
+  window.jQuery = jquery
+}
 
 let ao2 = aotoo
 ao2.lib = lib
