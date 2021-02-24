@@ -1,3 +1,64 @@
+const treeDoc = {
+  columns: [
+    {title: '参数', field: 'params'},
+    {title: '说明', field: 'desc'},
+    {title: '类型', field: 'type'},
+    {title: '可选值', field: 'ck'},
+    {title: '默认值', field: 'default'}
+  ],
+  data: [
+    {
+      params: 'data',
+      desc: '数据： [{ title: "菜单一", id: "aaa", children: [....] }] ',
+      type: 'array',
+      ck: '-',
+      default: '-'
+    },
+    {
+      params: 'allShow',
+      desc: '是否全部展开',
+      type: 'boolean',
+      ck: '-',
+      default: 'true'
+    },
+    {
+      params: 'showCheck',
+      desc: '是否显示 checkbox',
+      type: 'boolean',
+      ck: '-',
+      default: 'true'
+    },
+    {
+      params: 'icon',
+      desc: '可指定checkbox前的icon，这里只是更换icon，具体布局需要于listClass等配合',
+      type: 'string',
+      ck: '-',
+      default: 'icon-select'
+    },
+    {
+      params: 'getTreeData',
+      desc: '获取选中值',
+      type: 'function',
+      ck: '-',
+      default: ''
+    },
+    {
+      params: 'clearTreeData',
+      desc: '清空所有数据',
+      type: 'function',
+      ck: '-',
+      default: ''
+    },
+    {
+      params: 'resetData',
+      desc: '重置数据',
+      type: 'function',
+      ck: '-',
+      default: ''
+    }
+  ]
+}
+
 const tabsDoc = {
   columns: [
     {title: '参数', field: 'params'},
@@ -107,6 +168,7 @@ const tabsDoc = {
     }
   ]
 }
+
 const btTableDoc = {
   columns: [
     {title: '参数', field: 'params'},
@@ -509,5 +571,6 @@ module.exports = {
   tipDoc,
   swiperDoc,
   btTableDoc,
-  tabsDoc
+  tabsDoc,
+  treeDoc
 }

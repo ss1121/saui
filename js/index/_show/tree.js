@@ -1,31 +1,24 @@
 import Tree from "components/tree";
+import Table from "components/list/table";
+import { treeDoc } from "../document";
 
+const treeDc = Table({
+  tableClass: 'wid-p100',
+  ...treeDoc
+})
 import _message from "components/items/message";
 const message = _message()
 
-const treeData = [
-  {title: '标题1', id: 'aaa'},
-  {title: '标题2', parentId: 'aaa', id: 'level21'},
-  {title: '标题8', parentId: 'level21', id: 'aaa1-1-1', checked: true, disabled: true},
-  {title: '标题3', parentId: 'aaa', id: 'level2'},
-  {title: '标题4', parentId: 'level2', id: 'aaa1-2-1', checked: true},
-  {title: '标题5', parentId: 'level2', id: 'aaa1-2-2'},
-  {title: '标题6', parentId: 'level2', id: 'aaa1-2-3'},
-  {title: '标题6-1', parentId: 'aaa1-2-3', id: 'aaa1-3-1'},
-  {title: '标题7', id: 'bbb'},
-]
 //checked: true 不代表全选，仅表示有值
-const treeData2 = [
+const treeData = [
   {
     title: '菜单一',
     id: 'aaa',
-    // checked: true,
     children: [
       {
         title: '标题2',
         parentId: 'aaa',
         id: 'level21',
-        // checked: true,
         children: [
           {
             title: '标题8',
@@ -39,7 +32,6 @@ const treeData2 = [
         title: '标题3',
         parentId: 'aaa',
         id: 'level2',
-        // checked: true,
         children: [
           {
             title: '标题3-1',
@@ -57,18 +49,28 @@ const treeData2 = [
             title: '标题5',
             parentId: 'level2',
             id: 'level2-1',
-            // checked: true,
             children: [
               {
-                title: '标题6',
-                parentId: 'level2-1',
-                id: 'level2-4',
-                // checked: true,
-              },
-              {
-                title: '标题7',
+                title: '标题6a',
                 parentId: 'level2-1',
                 id: 'level2-4-2',
+              },
+              {
+                title: '标题6b',
+                parentId: 'level2-1',
+                id: 'level2-4',
+                children: [
+                  {
+                    title: '标题6-1',
+                    parentId: 'level2-4',
+                    id: 'level2-4-1-1',
+                  },
+                  {
+                    title: '标题6-2',
+                    parentId: 'level2-4',
+                    id: 'level2-4-1-2',
+                  },
+                ]
               },
             ]
           },
@@ -89,37 +91,8 @@ const treeData2 = [
   }
 ]
 
-const adapter = (data, output = []) => {
-  let ix = 0
-  let checkedStatus = 2
-  data.map(item => {
-    item.children && item.children.map(itemx => {
-      if (itemx.checked) {
-        ix ++
-      }
-    })
-    if ((item.children && item.children.length > 0) && ix === item.children.length) {
-      checkedStatus = 0
-    }
-    else if ((item.children && item.children.length > 0) && ix < item.children.length){
-      checkedStatus = 1
-    }
-    else {
-      checkedStatus = 2
-    }
-    output.push({
-      title: item.title,
-      idf: item.id,
-      parent: item.parentId ? item.parentId : '',
-      attr: {hasVals: item.children && item.children.length > 0 ? true : false, checkStatus: checkedStatus, disabled: item.disabled}
-    })
-    item.children && item.children.length > 0 ? adapter(item.children, output) : ''
-  })
-  return output
-}
-
 const treeInst = Tree({
-  data: treeData2,
+  data: treeData,
   header: {
     title: [
       {
@@ -134,22 +107,22 @@ const treeInst = Tree({
       },
       {
         title: '重置',
-        itemClass: 'ss-button btn-minor',
+        itemClass: 'ss-button btn-default',
         aim: 'resetData'
       },
       {
         title: '展开/收起',
-        itemClass: 'ss-button btn-minor mlr-default',
+        itemClass: 'ss-button btn-default mlr-default',
         aim: 'onChangeShowAll'
       },
       {
         title: '显示/隐藏 Check',
-        itemClass: 'ss-button btn-minor',
+        itemClass: 'ss-button btn-default',
         aim: 'onChangeCheck'
       },
       {
         title: '更换点击图标',
-        itemClass: 'ss-button btn-minor mlr-default',
+        itemClass: 'ss-button btn-default mlr-default',
         aim: 'onChangeToggle'
       },
     ],
@@ -178,7 +151,7 @@ const treeInst = Tree({
     },
     onChangeCheck() {
       const aa = treeInst.getData().showCheck
-      aa ? treeInst.updateStyle({showCheck: false}, true) : treeInst.updateStyle({showCheck: true},true)
+      aa ? treeInst.updateStyle({showCheck: false}, true) : treeInst.updateStyle({showCheck: true}, true)
     },
     onChangeToggle(e, p  ,i) {
       const aa = treeInst.getData().icon
@@ -197,9 +170,9 @@ function template(state, props) {
   return (
     <>
       <View className="pages-title-lg">Tree 树形控件</View>
-      <View className='demo-grid'>
-        <treeInst.UI/>
-      </View>
+      <treeInst.UI/>
+      <View className="pages-title-sm">Attributes</View>
+      {treeDc.render()}
     </>
   )
 }

@@ -36,7 +36,7 @@ const cpConfig = {
             this.showCheck ? {
               itemClass: item.attr.checkStatus === 0 ? 'icon-check icon-checked' : item.attr.checkStatus === 1 ? 'icon-check icon-check-line' : 'icon-check',
               aim: !item.attr.disabled ? this['onCheck'] : '',
-              attr: {id: item.idf}
+              attr: {id: item.idf, parent: item.parent}
             } : '',
             {
               title: item.title
@@ -46,6 +46,7 @@ const cpConfig = {
           idf: item.idf,
           attr: {title: item.title},
           parent: item.parent ? item.parent : '',
+          checked: item.attr.checkStatus
         }
       )
     })
@@ -54,46 +55,34 @@ const cpConfig = {
   onShowHide(e, p , i) {
     i.parentInst.toggleClass('block')
   },
-  adapter(data, id, status, output = []) {
-    let checkedStatus = 2
-    let pid = null
-    let xx = true
+  adapter(data, status, output = []) {
     data.map(item => {
-      let ix = 0
+      let ids = 0
+      let checkedStatus = item.checked ? 0 : 2
       if (item.children && item.children.length > 0) {
         item.children.forEach(itemx => {
-          if (itemx.id === pid) {
-            itemx.checked = status
-          }
           if (itemx.children && itemx.children.length > 0) {
-            if (itemx.children.findIndex(itemy => !itemy.checked) > -1) {
-              itemx.checked = false
-            }
-            else {
+            itemx.checked = false
+            if ( itemx.children.findIndex(itemy => !itemy.checked) < 0) {
               itemx.checked = true
             }
+           
           }
-          if (itemx.checked || itemx.hasV) {
-            ix ++
+          if (itemx.checked) {
+            ids ++
           }
         })
         
-        if (ix > 0) {
-          if (ix < item.children.length) {
-            item.hasV = 1
-            checkedStatus = 1
-          }
-          else{
+        if (ids > 0) {
+          checkedStatus = 1
+          if (ids >= item.children.length) {
             checkedStatus = 0
           }
-          
         }
-        else {
-          checkedStatus = 2
+        
+        if (item.children.findIndex(itemy => itemy.hasV) > -1) {
+          checkedStatus = checkedStatus !== 0 ? 1 : checkedStatus
         }
-      }
-      else {
-        checkedStatus = item.checked ? 0 : 2
       }
       output.push({
         title: item.title,
@@ -101,40 +90,53 @@ const cpConfig = {
         parent: item.parentId ? item.parentId : '',
         attr: {hasVals: item.children && item.children.length > 0 ? true : false, checkStatus: checkedStatus, disabled: item.disabled}
       })
-      item.children && item.children.length > 0 ? this.adapter(item.children, id, status, output) : ''
+      item.children && item.children.length > 0 ? this.adapter(item.children, status, output) : ''
     })
     return output
   },
-  regroupData(data, id, status, kk) {
-    return data.map(item => {
-      if (kk) {
-        if (item.parentId === id) {
-          !item.disabled ? item.checked = status : ''
-          if (item.children && item.children.length) {
-            this.regroupData(item.children, item.id, status, true)
-          }
+  regroupData(data, checkStatus, parentId, id, status) {
+    data.forEach(item => {
+      if (!status) {
+        if (!id || item.id === id) {
+          !checkStatus ? item.hasV = null : ''
+          !item.disabled ? item.checked = checkStatus : ''
+          item.children ? this.regroupData(item.children, checkStatus, item.parentId) : ''
+        }
+        else {
+          item.children ? item.id !== id ? this.regroupData(item.children, checkStatus, parentId, id) : '' : ''
         }
       }
-      else {
-        if (item.id === id) {
-          !item.disabled ? item.checked = status : ''
-          if (item.children && item.children.length) {
-            this.regroupData(item.children, item.id, status, true)
-          }
-        }
-        if (item.children && item.children.length) {
-          this.regroupData(item.children, id, status)
-        }
+
+      if (item.id === parentId ) {
+        item.checked = false
       }
-      return item
+      
+      if (item.children) {
+        if (item.children.findIndex(itemx => !itemx.checked) < 0) {
+          !item.disabled ? item.checked = checkStatus : ''
+        }
+        item.children.forEach(itemx => {
+          if (itemx.children && itemx.children.length > 0) {
+            !item.disabled ? itemx.checked = false : ''
+            if ( itemx.children.findIndex(itemy => !itemy.checked) < 0) {
+              itemx.checked = true
+            }
+            if ( itemx.children.findIndex(itemy => itemy.checked) > -1) {
+              itemx.hasV = 1
+            }
+          }
+        })
+        
+      }
     })
   },
   onCheck(e, params , inst) {
     const id = inst.attr('id')
+    const parentId = inst.attr('parent')
     let status = inst.hasClass('icon-checked') ? false : true
     const data = this.data._data
-    const xx = this.regroupData(data, id, status)     //先更新基础数据，再去适配
-    const _newData = this.adapter(xx, id, status)     //适配成组件需要的
+    this.regroupData(data, status, parentId, id)      //先更新基础数据，再去适配
+    const _newData = this.adapter(data, status)       //适配成组件需要的
     const akkk = this._adapterCheck(_newData)         //最终生成tree的数据结构
     this.setData({
       data: akkk,
@@ -164,7 +166,7 @@ const cpConfig = {
   clearChecked() {
     let hasCheckedData = []
     const data = this.data.oldData
-    const clear = this.clearForEachData(data)
+    const clear = this.adapter(this.clearForEachData(data))
     this.setData({
       data: this._adapterCheck(clear)
     })
@@ -172,7 +174,7 @@ const cpConfig = {
   resetControl() {
     this.icon = 'icon-select'
     this.showCheck = true
-    let param = {data: this._adapterCheck(this.data.oldData), listClass: 'ss-tree', allShow: true, showCheck: true, showIcon: true, icon: 'icon-select'}
+    let param = {data: this._adapterCheck(this.adapter(this.data.oldData)), listClass: 'ss-tree', allShow: true, showCheck: true, showIcon: true, icon: 'icon-select'}
     this.reset(param)
   },
   updateStyle(params, type) {
@@ -181,7 +183,7 @@ const cpConfig = {
       this.showCheck = params.showCheck
       this.setData({
         ...params,
-        data: this._adapterCheck(this.data.oldData)
+        data: this._adapterCheck(this.adapter(this.data.oldData))
       })
     }
     else {
